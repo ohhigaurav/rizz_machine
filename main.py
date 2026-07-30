@@ -478,4 +478,4 @@ async def generate(
     )
 
 # Mount the static directory to serve the frontend
-app.mount("/", StaticFiles(directory="static", html=True), name="static")add
+app.mount("/", StaticFiles(directory="static", html=True), name="static")
