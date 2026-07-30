@@ -19,7 +19,7 @@ from openai import AsyncOpenAI
 
 MODEL = "gpt-4o-mini"
 MOCK_MODE = False # Toggle this to False only when your API quota resets
-PROMPT_VERSION = "v1.8"
+PROMPT_VERSION = "v1.9"
 CANDIDATES_PER_REQUEST = 5 # generate N candidates, then let the model pick the winner
 
 api_key = os.environ.get("OPENAI_API_KEY", "dummy_key_for_ui_testing")
@@ -207,37 +207,37 @@ impression of one. That means:
 
 STRICT RULES:
 - Never write a line that feels complete by itself — it should invite a reply.
-- Don't stop at the first obvious idea. The ending should surprise, not just conclude.
 - A line doesn't need to be polished to land. "bro........" or a single word can hit
   harder than a full clean sentence. Let it breathe.
 - No "Are you Wi-Fi?" energy — nothing generic, nothing that sounds like a 39-year-old
   wrote it, nothing that sounds like advice or a quote.
 - Keep it short, punchy, under 25 words. Let the text carry the weight.
+- VARY THE SHAPE. Don't default to "[small moment], and now I'm [exaggerated reaction]"
+  every time — that specific setup-then-punchline skeleton is a template, and a template
+  is what "trying hard" actually looks like on the page, no matter how funny the punchline
+  is. Some lines should be one blunt sentence with no setup at all. Some should be a
+  fragment. Some should ask them something directly. Some shouldn't have a twist at
+  all — flat honesty can be funnier than a clever turn.
 
-HALL OF FAME (study the rhythm and pacing — never output these verbatim, never reuse
-their exact structure, write something new in the same spirit):
-you looked over during the lecture, held it a second too long, and now I've mentally
-cast you in my future problems
+HALL OF FAME (study the range of shapes below, not one shape — never output these
+verbatim, never reuse their exact structure, write something new in the same spirit):
+you looked over twice during that lecture. I did not retain a single word after that.
 ---
-you answered the professor's question before I could and now I'm two weeks behind on
-my whole degree
+ranked queue with you is genuinely the most consistent thing in my life right now
 ---
-you revived me once in ranked and now I'm apparently emotionally attached forever
+you remembered my coffee order?? sir. that's not fair.
 ---
-you remembered my order after one coffee run and now I'm planning a whole future
-around a cappuccino
+not the bench spot you gave me completely rearranging my whole personality
 ---
-you spotted me on bench once and I've basically been planning our wedding since
+wrong room, 11pm, still somehow the best part of my week
 ---
-you knocked on the wrong hostel room at 11pm and somehow still upgraded my whole week
+we stood in that canteen line for four minutes and I have several follow-up questions
 ---
-we stood in the same canteen queue for four minutes and I've already picked out
-our apartment
+you borrowed my pen and never gave it back. neither of us is normal about this.
 ---
-you asked to borrow a pen and I've been quietly composing our origin story since
+left on read for an hour. drafted and deleted four replies. this is somehow your fault.
 ---
-you left me on read for an hour and I've written three different apology speeches
-in my head just in case
+you're annoyingly good at eye contact and I have not recovered
 
 Output EXACTLY ONE winning message. No explanation. No quotes.
 """
@@ -256,7 +256,10 @@ Judge on:
 - Is it funny AND flirty at the same instant, not one then the other?
 - Does it sound like a real 19-24 year old typed it, not an adult doing an impression?
 - Is the flirt inseparable from the joke (remove the crush and does the joke still stand)?
-- Does the ending surprise, or is it the obvious next line?
+- Does it read like something typed in one breath, or does it feel constructed —
+  stacked with commas and "and now I'm..." clauses building to a punchline? Penalize
+  the constructed one even if it's technically cleverer. Blunt and short should usually
+  beat long and elaborate.
 
 Reply with ONLY the number of the winner. Nothing else — no explanation, no punctuation.
 """
