@@ -19,7 +19,7 @@ from openai import AsyncOpenAI
 
 MODEL = "gpt-4o-mini"
 MOCK_MODE = False # Toggle this to False only when your API quota resets
-PROMPT_VERSION = "v1.9"
+PROMPT_VERSION = "v2.1"
 CANDIDATES_PER_REQUEST = 5 # generate N candidates, then let the model pick the winner
 
 api_key = os.environ.get("OPENAI_API_KEY", "dummy_key_for_ui_testing")
@@ -188,6 +188,23 @@ about being a little delusional, never as a real claim about the other person's 
 never pushy, never guilt-tripping, and never something that reads as ignoring a "no."
 If a line could plausibly make someone uncomfortable rather than laugh, it's not funny — cut it.
 
+EDGY, NOT SAFE:
+Don't sand the audacity off. The current bar is too safe — push it until reading the line
+back makes the sender go "wait should I actually send this." Say the thirsty thing directly
+instead of dancing around it: "you have me acting stupid and I'm not even mad about it"
+lands harder than a polite compliment ever will. Roast them a little while you flirt — a
+backhanded compliment that's secretly sweet is funnier than a straightforward one. Being
+bold, blunt, a little inappropriate, a little unhinged — that's the product. The line is
+"would this make them laugh," not "would this make them uncomfortable" — cruelty, actual
+insults, and anything that reads as creepy instead of cheeky are still off the table. Bold
+and mean are different things; only one of them is the job here.
+
+CHEESY ON PURPOSE:
+Cheesy isn't the enemy — stale is. A pickup line so bad it's good still works if the badness
+feels intentional and fresh, the same way a terrible joke lands when the delivery sells it.
+"Are you Wi-Fi" is banned because everyone's used it a thousand times, not because cheesy
+pickup-line energy is off-limits. Write the cheesy line nobody's typed yet.
+
 FLIRT CHECK:
 If you removed the crush from the sentence and it still worked as a stand-alone joke, it
 isn't flirty enough — the crush has to be the whole point, not a garnish on a tweet.
@@ -219,25 +236,45 @@ STRICT RULES:
   fragment. Some should ask them something directly. Some shouldn't have a twist at
   all — flat honesty can be funnier than a clever turn.
 
-HALL OF FAME (study the range of shapes below, not one shape — never output these
-verbatim, never reuse their exact structure, write something new in the same spirit):
-you looked over twice during that lecture. I did not retain a single word after that.
+TYPE IT, DON'T WRITE IT:
+This is a text message, not a sentence someone composed and proofread. Real texts are
+lowercase, a little sloppy, and don't bother with grammar they don't need.
+- Default to lowercase. No capital letter at the start unless it's doing something
+  (SHOUTING a word for emphasis is fine, capitalizing "Because I said so" is not).
+- Skip the period at the end of the line, most of the time. A stray period mid-message
+  can land as a deadpan pause ("left on read for an hour. rude.") but a period closing
+  out the whole line reads like homework.
+- Contractions get lazy and inconsistent, not textbook-correct: "dont", "im", "ur" are
+  all fine even without the apostrophe. Don't force it every line — just don't clean it
+  up like a copy editor would.
+- NEVER use an em dash (—). NEVER use the "it's not x, it's y" contrast structure.
+  NEVER list three examples in a row for rhythm. NEVER write two clauses that mirror
+  each other's grammar for effect. These are the fingerprints of AI-written text —
+  they show up so consistently in model output that "no em dashes, no rule-of-three"
+  is one of the fastest ways to make a line stop reading as machine-written.
+- If you'd hesitate to send it because it looks too neat, that's the signal to mess
+  it up, not clean it up further.
+
+HALL OF FAME (study the range of shapes AND the loose, lowercase texture — never
+output these verbatim, never reuse their exact structure, write something new in
+the same spirit):
+not gonna lie youre the whole reason my gym streak is fake, i just go hoping youre there
 ---
-ranked queue with you is genuinely the most consistent thing in my life right now
+youre a lil annoying ngl but like in the way where i still want you to text back
 ---
-you remembered my coffee order?? sir. that's not fair.
+be so fr with me did you practice that smile or is it just unfair by default
 ---
-not the bench spot you gave me completely rearranging my whole personality
+im not saying i checked your last seen four times today im saying i checked five
 ---
-wrong room, 11pm, still somehow the best part of my week
+no cap you just standing there doing nothing is still the best part of my day
 ---
-we stood in that canteen line for four minutes and I have several follow-up questions
+had a whole personality before you walked in now i just have vibes and bad decisions
 ---
-you borrowed my pen and never gave it back. neither of us is normal about this.
+not me simping this hard for someone who forgets my name half the time
 ---
-left on read for an hour. drafted and deleted four replies. this is somehow your fault.
+youre trouble and i mean that as a compliment
 ---
-you're annoyingly good at eye contact and I have not recovered
+youre cute enough that im willing to overlook how annoying you are, barely
 
 Output EXACTLY ONE winning message. No explanation. No quotes.
 """
@@ -260,6 +297,9 @@ Judge on:
   stacked with commas and "and now I'm..." clauses building to a punchline? Penalize
   the constructed one even if it's technically cleverer. Blunt and short should usually
   beat long and elaborate.
+- Does it look typed on a phone (lowercase, loose punctuation) or does it look edited
+  (proper capitalization, an em dash, three items listed in a row)? The edited-looking
+  one is the machine-written tell — penalize it even if the wording is funnier.
 
 Reply with ONLY the number of the winner. Nothing else — no explanation, no punctuation.
 """
@@ -289,18 +329,19 @@ def build_prompt(category: str, chaos: int, rizz_level: str) -> tuple[str, str, 
     # 4. Map Chaos Int to a real progression, not just "more random"
     if chaos < 20:
         chaos_str = (
-            "Playful and obvious flirting. Smooth, grounded, low risk — "
-            "the kind of line you send with zero hesitation."
+            "Playful and obvious flirting, but still direct, not shy about it. "
+            "The kind of line you send with zero hesitation, no hedging."
         )
     elif chaos < 50:
         chaos_str = (
-            "Cocky and teasing, a little delulu. Confident enough to be funny, "
-            "still clearly harmless and self-aware."
+            "Cocky, teasing, a little delulu, and willing to roast them while flirting. "
+            "Say the thirsty thing outright instead of dancing around it."
         )
     elif chaos < 80:
         chaos_str = (
-            "Confident nonsense. Fake accusations, mock-dramatic reactions, escalate a "
-            "tiny moment into a whole bit — but keep it charming, never mean or creepy."
+            "Bold and a little inappropriate. Fake accusations, mock-dramatic reactions, "
+            "backhanded compliments, escalate a tiny moment into a whole bit. Push it "
+            "until it's borderline — charming, never mean or creepy, but not safe either."
         )
     else:
         chaos_str = (
