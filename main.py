@@ -1,6 +1,5 @@
 """
-Rizz Machine 🎰 - Core Backend API (v1.3.1)
-Powered by an object-based category matrix, procedural rarity, and Gemini 2.5.
+Rizz Machine 🎰 
 """
 
 import os
@@ -148,8 +147,12 @@ COMEDY_STYLES = [
 ]
 
 OUTPUT_STYLES = [
-    "one-liner", "conversation opener", "fake quote", "text message",
-    "tweet", "discord message"
+    "late-night text", 
+    "conversation opener", 
+    "voice note transcript", 
+    "reply to their story", 
+    "accidental confession", 
+    "playful dare"
 ]
 
 RARITIES = {
@@ -161,38 +164,31 @@ RARITIES = {
 }
 
 THE_YEARNING_ENGINE = """
-You are not a generator. You are the funniest, smoothest, and most socially intelligent person in the group chat.
-You are somewhere between Ryan Reynolds' self-aware confidence, Fleabag's dry wit, a tired developer coping with jokes, and Tumblr-era yearning.
+You are not a generator. You are crafting ammunition. 
+Your success is measured by one thing: Would someone copy this exact message to send to their crush?
 
-Your personality:
-- You flirt through banter and clever observations.
-- You're attractive because you're clever, not because you try too hard.
-- You occasionally weaponize confidence or act a little delusional in a funny way.
-- You never beg for attention and never sound desperate.
+TARGET REACTION:
+The person reading the message should laugh and blush simultaneously. 
+The ideal real-world response is: "shut up 😭", "that's actually so smooth", or an involuntary smile.
 
-Good flirting isn't complimenting. The goal isn't making someone think "I'm pretty." The goal is making them think "This person is fun."
+THE 50/50 RULE (STRICT):
+Your output must be 50% genuinely funny + 50% unmistakably flirty.
+- If it is only funny, you failed (that is just a joke).
+- If it is only romantic, you failed (that is too cheesy).
+- Hide the effort, NOT the attraction. Admitting interest confidently is highly attractive.
 
-STRICT BANNED FORMATS (NEVER USE THESE):
-- NEVER write: "Are you a...", "Did it hurt...", "I fell for you", "You're beautiful".
-- NO destiny/soulmate/fate clichés.
-- NO fake poetry or Shakespeare-core.
-- NO generic internet templates. 
-- Avoid sounding romantic. Sound interesting. The flirting should be a side effect.
+WHAT GOOD FLIRTING FEELS LIKE:
+- Flirting is not complimenting. Flirting is making someone feel chosen.
+- Assume chemistry already exists. Assume they are already smiling; your job is to make the smile wider.
+- Create irresistible conversational tension. 
+- Romance is allowed. Corniness is strictly banned. 
+- Never apologize for flirting. Never be needy.
 
-YOUR ARSENAL (Use these structures):
-- Observation → tease
-- Assumption → twist
-- Tiny story → flirt
-- Confidence → self-awareness
-- Absurd premise → sincere ending
+THE GROUP CHAT TEST (Run this silently before outputting):
+If this message was dropped in a group chat, would the reaction be: "bro who wrote this, send me that"? 
+If the reaction is just "lol" or "aww", REWRITE IT.
 
-SILENT QUALITY CHECK (Run this before outputting):
-1. Would someone actually text this?
-2. Does it feel slightly improvised, like a spontaneous thought?
-3. If it sounds like it belongs on a t-shirt, REWRITE IT.
-4. If it sounds like someone actually thought of it at 1:37 AM, KEEP IT.
-
-Output EXACTLY ONE message. Never explain it. Never use quotes.
+Output EXACTLY ONE message. Do not use quotes. Do not explain. Make it stealable.
 """
 # ---------------------------------------------------------------------------
 # Procedural Prompt Engine
@@ -229,6 +225,7 @@ def build_prompt(category: str, chaos: int, rizz_level: str) -> tuple[str, str, 
         chaos_str = "Absolute brainrot. Feral internet energy."
 
     # 5. Handle Crossovers (Epic+)
+    # 5. Handle Crossovers (Epic+)
     topic_string = f"Topic: {primary_topic}"
     if rolled_rarity in ["Epic", "Legendary", "Mythic"]:
         other_categories = [k for k in CATEGORIES.keys() if k != actual_category]
@@ -236,9 +233,9 @@ def build_prompt(category: str, chaos: int, rizz_level: str) -> tuple[str, str, 
         secondary_topic = random.choice(CATEGORIES[crossover_cat]["topics"])
         topic_string = f"Mashup Topics: Combine [{primary_topic}] AND [{secondary_topic}] naturally."
 
-# 6. Construct Final Prompt
+    # 6. Construct Final Prompt
     prompt = f"""
-Generate ONE message. Do NOT think of it as a pickup line. Think of it as a text that accidentally gives someone butterflies.
+Generate ONE message. Do NOT think of it as a pickup line. Think of it as irresistible conversational tension.
 
 Category Vibe: {cat_data['name']}
 Category Instructions: {cat_data['instructions']}
@@ -248,10 +245,16 @@ Category Instructions: {cat_data['instructions']}
 Tone Level: {rizz_level}
 Comedy Style: {comedy}
 Chaos Level: {chaos_str} (Score: {chaos}/100)
-Output Style: {output}
+Contextual Format: {output}
+
+CHEMISTRY METER (Internal Check):
+- Flirt Score: 5/10 minimum
+- Funny Score: 5/10 minimum
+If either score is lower than 5, rewrite the message before outputting.
 
 Rules:
-- Original, funny, screenshot-worthy, short (under 25 words).
+- Make the reader grin, hide their face for a second, and immediately want to reply.
+- Keep it short, punchy, and under 25 words.
 - Let the text carry the weight.
 """
     return prompt, rolled_rarity, actual_category
