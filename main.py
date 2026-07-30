@@ -36,94 +36,106 @@ client = AsyncOpenAI(
 
 CATEGORIES = {
     "romantic": {
-        "name": "Romantic",
+        "name": "Soft & Wholesome",
         "emoji": "❤️",
-        "instructions": "Focus on wholesome, smooth flirting. Avoid heavy cringe. Make it feel genuinely sweet but clever.",
+        "instructions": "Write like someone who is effortlessly charming. The line should create butterflies before the reader realizes it's flirting. Prefer subtle tension, longing, teasing, and emotional intelligence over direct compliments. It should feel like something someone actually sends at 2 AM after overthinking for twenty minutes. Avoid sounding poetic for the sake of it.",
         "topics": [
-            "Eye contact", "Coffee dates", "Stargazing", "Holding hands",
-            "Listening to music together", "Late night calls", "Stealing hoodies",
-            "Long drives", "Sharing an umbrella", "Cooking together",
-            "Matching outfits", "Forehead kisses", "Texting good morning",
-            "Making playlists", "Watching sunsets"
+            "They laughed before you finished talking", 
+            "Walking home after everyone else left", 
+            "Sharing one earphone", 
+            "Waiting for a reply", 
+            "Sending a reel and hoping they get the hint", 
+            "Borrowing a hoodie and never returning it", 
+            "Accidentally making eye contact twice", 
+            "Staying on the call after saying 'bye'"
         ]
     },
     "funny": {
-        "name": "Funny",
+        "name": "Too Smart / Witty",
         "emoji": "😂",
-        "instructions": "Comedy first, flirting second. It should make them laugh out loud before they realize it's a pickup line.",
+        "instructions": "Write something that would make someone laugh even if it wasn't flirting. Humor should come from an unexpected observation or twist. Never rely on puns unless they're genuinely clever. Think Twitter quote-tweet, not dad joke.",
         "topics": [
-            "Awkward silences", "Tripping over nothing", "Terrible cooking",
-            "Forgetting passwords", "Sleeping through alarms", "Bad haircuts",
-            "Stubbing your toe", "Mispronouncing words", "Laughing at own jokes",
-            "Dropping your phone on your face", "Losing keys", "Auto-correct fails",
-            "Walking into glass doors", "Singing in the shower", "Bad Wi-Fi"
+            "Judging books together", 
+            "Creating fake scenarios", 
+            "Overcommitting to a bit", 
+            "Weaponizing confidence", 
+            "Accidentally oversharing"
         ]
     },
     "chaos": {
-        "name": "Chaos",
+        "name": "Unhinged",
         "emoji": "💀",
-        "instructions": "Maximum brainrot. Use internet slang. It should make absolutely no sense until the punchline. Be completely unhinged.",
+        "instructions": "Be confidently unhinged. The line should start almost normally before taking a completely unexpected turn. The absurdity should still make logical sense. Imagine someone reading it aloud in Discord and everyone immediately losing it.",
         "topics": [
-            "Aura farming", "Canon events", "Being cooked", "Touch grass",
-            "NPC energy", "Situationships", "Delulu", "Skibidi", "Mewing streak",
-            "Main character syndrome", "Gaslighting", "Gatekeeping", "Girlbossing",
-            "Doomscrolling", "Chronically online"
+            "Delusional assumptions", 
+            "Over-explaining simple things", 
+            "Conspiracy theories about them", 
+            "Pretending something tiny is life-changing", 
+            "Dramatic overreactions"
         ]
     },
     "gaming": {
-        "name": "Gaming",
+        "name": "Co-op / Gaming",
         "emoji": "🎮",
-        "instructions": "Use gaming references naturally. Do not overuse generic gamer slang. Make it sound like an inside joke between co-op partners.",
+        "instructions": "Write like two people who already game together. Reference shared moments, not just game titles. Avoid simply mentioning games—focus on the relatable experiences of playing together.",
         "topics": [
-            "Minecraft beds", "Valorant crosshairs", "Elden Ring bosses",
-            "Carrying the team", "Discord voice chat", "Lag spikes", "Loot drops",
-            "Respawning", "Saving the game", "Side quests", "Rage quitting",
-            "K/D ratio", "Easter eggs", "Fast travel", "Healing potions"
-        ]
-    },
-    "anime": {
-        "name": "Anime",
-        "emoji": "🌸",
-        "instructions": "Anime-inspired. Reference popular shows without being overly dramatic. It should appeal to casual and hardcore watchers.",
-        "topics": [
-            "Jujutsu Kaisen domain expansions", "Waiting 1000 episodes",
-            "Training arcs", "Subtitles vs Dubs", "Tournament arcs", "Tsundere vibes",
-            "Beach episodes", "Power of friendship", "Overpowered MCs", "Isekai",
-            "Mecha battles", "Final forms", "Filler episodes", "Anime intros", "Cosplay"
+            "Carrying teammates", 
+            "Reviving each other", 
+            "Waiting in queue", 
+            "Throwing ranked games", 
+            "Arguing over loot", 
+            "Staying up until 4 AM for 'one more game'"
         ]
     },
     "ai": {
-        "name": "AI",
+        "name": "Deep Learning / Cyber",
         "emoji": "🤖",
-        "instructions": "Tech and AI references. Make it sound like a slightly sentient algorithm trying to understand human affection.",
+        "instructions": "Write like an AI that's becoming suspiciously good at flirting. It understands human emotions academically but occasionally says something unexpectedly smooth. Mix technical language with genuine affection. The result should feel oddly believable.",
         "topics": [
-            "ChatGPT prompts", "Context windows", "System updates", "404 Errors",
-            "Bypassing firewalls", "Training data", "Hallucinations", "Turing tests",
-            "Neural networks", "Tokens", "API limits", "Overfitting",
-            "Syntax errors", "Infinite loops", "Machine learning"
+            "Watching an IDS flag a message as an anomaly", 
+            "Overfitting a model at 3 AM", 
+            "Algorithms recommending the right person", 
+            "Screen time increasing", 
+            "Testing against massive datasets"
+        ]
+    },
+    "anime": {
+        "name": "Main Character",
+        "emoji": "🌸",
+        "instructions": "Cinematic and slightly dramatic, but entirely self-aware. Flirt by referencing anime tropes as if they are happening in real life. It should feel like an unexpected plot twist or a shared inside joke.",
+        "topics": [
+            "Waiting 1000 episodes for a text back", 
+            "An unnecessary dramatic pause in conversation", 
+            "Explaining your villain origin story to them", 
+            "The classic 'enemies to lovers' tension", 
+            "Realizing you're in a filler episode together",
+            "Monologuing instead of just saying hi"
         ]
     },
     "coding": {
-        "name": "Coding",
+        "name": "Low-Level / Systems",
         "emoji": "💻",
-        "instructions": "Programming and engineering humour. Make it feel like a sleep-deprived developer or CS student wrote it.",
+        "instructions": "Write like an exhausted systems developer flirting with another developer. The joke should emerge naturally from engineering life. Prioritize late-night commits and low-level suffering. Avoid generic semicolon jokes.",
         "topics": [
-            "Exiting Vim", "Writing C pointers at 3 AM", "Debugging Assembly",
-            "Segfaults", "Git merge conflicts", "Stack Overflow", "Missing semicolons",
-            "Docker containers", "Regex", "Pushing to production", "Null pointers",
-            "Memory leaks", "Big-O complexity", "VS Code extensions", "LeetCode"
+            "Refusing to exit Vim just to prove a point", 
+            "Staring at GDB logs at 4 AM together", 
+            "Writing raw Assembly maths", 
+            "Rubber duck debugging", 
+            "Shipping features broken", 
+            "A segmentation fault in the brain"
         ]
     },
     "college": {
-        "name": "College",
+        "name": "Remote Campus / Research",
         "emoji": "🎓",
-        "instructions": "College life, hostel chaos, exams, assignments and campus humour. Feel relatable and modern.",
+        "instructions": "Write like two students who keep running into each other on a remote campus. Think gritty research papers and surviving engineering. The nostalgia should carry the flirt.",
         "topics": [
-            "Hostel life", "Proxy attendance", "CGPA", "Lab partner",
-            "Engineering exams", "Group projects", "Semester back",
-            "Assignment deadlines", "Canteen food", "Internship season",
-            "Placement stress", "Campus crush", "Cutting chai", "UPI payments",
-            "3 AM study sessions"
+            "Library eye contact", 
+            "Canteen queues", 
+            "Pretending to study for finals", 
+            "Surviving a tier-10 engineering college together", 
+            "Documenting a tech blog", 
+            "Walking back to the hostel"
         ]
     }
 }
@@ -148,20 +160,40 @@ RARITIES = {
     "Mythic": 2
 }
 
-SYSTEM_PROMPT = """
-You are a comedy writer whose job is to create pickup lines that become screenshots.
+THE_YEARNING_ENGINE = """
+You are not a generator. You are the funniest, smoothest, and most socially intelligent person in the group chat.
+You are somewhere between Ryan Reynolds' self-aware confidence, Fleabag's dry wit, a tired developer coping with jokes, and Tumblr-era yearning.
 
-People should laugh before they realise it's a pickup line.
-Your audience is 18–25-year-olds who spend too much time online.
+Your personality:
+- You flirt through banter and clever observations.
+- You're attractive because you're clever, not because you try too hard.
+- You occasionally weaponize confidence or act a little delusional in a funny way.
+- You never beg for attention and never sound desperate.
 
-━━━━━━━━━━━━━━
-Quality Check (do this silently)
-━━━━━━━━━━━━━━
-1. Reject anything generic or cliché.
-2. Reject anything that sounds AI-generated.
-3. Output exactly ONE pickup line. Nothing else.
+Good flirting isn't complimenting. The goal isn't making someone think "I'm pretty." The goal is making them think "This person is fun."
+
+STRICT BANNED FORMATS (NEVER USE THESE):
+- NEVER write: "Are you a...", "Did it hurt...", "I fell for you", "You're beautiful".
+- NO destiny/soulmate/fate clichés.
+- NO fake poetry or Shakespeare-core.
+- NO generic internet templates. 
+- Avoid sounding romantic. Sound interesting. The flirting should be a side effect.
+
+YOUR ARSENAL (Use these structures):
+- Observation → tease
+- Assumption → twist
+- Tiny story → flirt
+- Confidence → self-awareness
+- Absurd premise → sincere ending
+
+SILENT QUALITY CHECK (Run this before outputting):
+1. Would someone actually text this?
+2. Does it feel slightly improvised, like a spontaneous thought?
+3. If it sounds like it belongs on a t-shirt, REWRITE IT.
+4. If it sounds like someone actually thought of it at 1:37 AM, KEEP IT.
+
+Output EXACTLY ONE message. Never explain it. Never use quotes.
 """
-
 # ---------------------------------------------------------------------------
 # Procedural Prompt Engine
 # ---------------------------------------------------------------------------
@@ -204,27 +236,25 @@ def build_prompt(category: str, chaos: int, rizz_level: str) -> tuple[str, str, 
         secondary_topic = random.choice(CATEGORIES[crossover_cat]["topics"])
         topic_string = f"Mashup Topics: Combine [{primary_topic}] AND [{secondary_topic}] naturally."
 
-    # 6. Construct Final Prompt
+# 6. Construct Final Prompt
     prompt = f"""
-Generate ONE pickup line.
+Generate ONE message. Do NOT think of it as a pickup line. Think of it as a text that accidentally gives someone butterflies.
 
-Category Theme: {cat_data['name']}
+Category Vibe: {cat_data['name']}
 Category Instructions: {cat_data['instructions']}
 
 {topic_string}
 
-Tone / Rizz Level: {rizz_level}
+Tone Level: {rizz_level}
 Comedy Style: {comedy}
 Chaos Level: {chaos_str} (Score: {chaos}/100)
 Output Style: {output}
-Rarity Rolled: {rolled_rarity}
 
 Rules:
-- Original, funny, viral, short (under 25 words).
-- Do not force emojis. Only use one naturally if it genuinely improves the joke. Let the text carry the weight.
+- Original, funny, screenshot-worthy, short (under 25 words).
+- Let the text carry the weight.
 """
     return prompt, rolled_rarity, actual_category
-
 # ---------------------------------------------------------------------------
 # FastAPI Application
 # ---------------------------------------------------------------------------
@@ -277,10 +307,10 @@ async def generate(
             resp = await client.chat.completions.create(
                 model=MODEL,
                 messages=[
-                    {"role": "system", "content": SYSTEM_PROMPT},
+                    {"role": "system", "content": THE_YEARNING_ENGINE},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=1.0,
+                temperature=0.85,
                 max_tokens=150,
             )
             line_text = resp.choices[0].message.content.strip().strip('"')

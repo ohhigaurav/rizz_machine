@@ -17,25 +17,22 @@
 
         /* The Gen-Z Notebook Canvas */
         body {
-            background-color: #fdf2f8; /* Soft pink-cream */
+            background-color: #fdf2f8;
             background-image: 
                 linear-gradient(#fbcfe8 1.5px, transparent 1.5px),
                 linear-gradient(90deg, #fbcfe8 1.5px, transparent 1.5px);
             background-size: 28px 28px;
             overflow-x: hidden;
-            color: #3f2a24; /* Warm espresso ink */
+            color: #3f2a24;
         }
 
         /* Comic Illustration Shadows */
-        .machine-shadow {
-            box-shadow: 14px 14px 0px 0px #3f2a24, inset -8px -8px 20px rgba(0,0,0,0.08);
+        .machine-shadow { box-shadow: 10px 10px 0px 0px #3f2a24, inset -8px -8px 20px rgba(0,0,0,0.08); }
+        @media (min-width: 640px) {
+            .machine-shadow { box-shadow: 14px 14px 0px 0px #3f2a24, inset -8px -8px 20px rgba(0,0,0,0.08); }
         }
-        .sticker-shadow {
-            box-shadow: 6px 6px 0px 0px #3f2a24;
-        }
-        .screen-inner {
-            box-shadow: inset 0px 8px 16px rgba(0,0,0,0.12);
-        }
+        .sticker-shadow { box-shadow: 6px 6px 0px 0px #3f2a24; }
+        .screen-inner { box-shadow: inset 0px 8px 16px rgba(0,0,0,0.12); }
 
         /* Translucent Washi Tapes */
         .washi-pink { background: rgba(255, 182, 193, 0.75); backdrop-filter: blur(3px); border: 1.5px solid rgba(63, 42, 36, 0.2); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
@@ -49,8 +46,11 @@
 
         /* Giant Tempting Button */
         .btn-giant {
-            box-shadow: 0px 8px 0px #3f2a24, 0px 12px 16px rgba(63, 42, 36, 0.2);
+            box-shadow: 0px 6px 0px #3f2a24, 0px 10px 14px rgba(63, 42, 36, 0.2);
             transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @media (min-width: 640px) {
+            .btn-giant { box-shadow: 0px 8px 0px #3f2a24, 0px 12px 16px rgba(63, 42, 36, 0.2); }
         }
         .btn-giant:active, .btn-giant.pressed {
             transform: translateY(8px);
@@ -59,11 +59,11 @@
 
         /* Grid Category Pills */
         .grid-btn {
-            box-shadow: 0px 5px 0px #3f2a24;
+            box-shadow: 0px 4px 0px #3f2a24;
             transition: all 0.1s;
         }
         .grid-btn:active, .grid-btn.selected {
-            transform: translateY(5px);
+            transform: translateY(4px);
             box-shadow: 0px 0px 0px #3f2a24;
             filter: brightness(0.95);
         }
@@ -110,8 +110,8 @@
 </head>
 <body class="min-h-screen font-display flex flex-col items-center justify-center p-4 sm:p-8">
 
-    <!-- FLOATING GIRL-VIBE DOODLES -->
-    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <!-- FLOATING GIRL-VIBE DOODLES (Hidden on tiny screens to avoid clutter) -->
+    <div class="hidden sm:block fixed inset-0 pointer-events-none overflow-hidden z-0">
         <div class="absolute top-[10%] left-[8%] text-3xl opacity-80 animate-float rotate-[-12deg]">✨</div>
         <div class="absolute top-[25%] right-[12%] text-4xl opacity-90 animate-float-delayed rotate-[15deg] hue-rotate-30">🎀</div>
         <div class="absolute bottom-[20%] left-[12%] text-3xl opacity-70 animate-float text-[#ff8ca3] rotate-[-20deg]">💖</div>
@@ -121,7 +121,7 @@
     </div>
 
     <!-- MAIN WRAPPER -->
-    <div class="relative w-full max-w-2xl mx-auto flex flex-col items-center mt-12 md:mt-24 z-10">
+    <div class="relative w-full max-w-2xl mx-auto flex flex-col items-center mt-16 md:mt-24 z-10">
 
         <!-- ================= SCRAPBOOK STICKERS & TAPE ================= -->
         
@@ -157,144 +157,144 @@
 
         <!-- ================= THE MACHINE ================= -->
         <!-- Gorgeous Strawberry Milk Pink -->
-        <div id="vending-machine" class="bg-[#ff9fb3] border-[6px] border-[#3f2a24] rounded-[2.5rem] w-full max-w-[440px] p-6 sm:p-7 machine-shadow relative transition-transform duration-75 flex flex-col gap-6 z-10">
+        <div id="vending-machine" class="bg-[#ff9fb3] border-[5px] sm:border-[6px] border-[#3f2a24] rounded-[2rem] sm:rounded-[2.5rem] w-full max-w-[440px] p-4 sm:p-7 machine-shadow relative transition-transform duration-75 flex flex-col gap-5 sm:gap-6 z-10">
             
             <!-- HEADER SIGN & TAPE OVERLAY -->
-            <div class="absolute -top-16 left-1/2 -translate-x-1/2 w-28 h-7 washi-yellow rotate-[3deg] z-30"></div>
+            <div class="absolute -top-14 sm:-top-16 left-1/2 -translate-x-1/2 w-24 sm:w-28 h-6 sm:h-7 washi-yellow rotate-[3deg] z-30"></div>
             
-            <div class="absolute -top-12 left-1/2 -translate-x-1/2 bg-[#fffcf2] border-[5px] border-[#3f2a24] rounded-2xl py-3 px-10 text-center z-20 shadow-[0px_6px_0px_#3f2a24] w-11/12 max-w-[320px]">
+            <div class="absolute -top-10 sm:-top-12 left-1/2 -translate-x-1/2 bg-[#fffcf2] border-[4px] sm:border-[5px] border-[#3f2a24] rounded-2xl py-2 sm:py-3 px-6 sm:px-10 text-center z-20 shadow-[0px_4px_0px_#3f2a24] sm:shadow-[0px_6px_0px_#3f2a24] w-[95%] sm:w-11/12 max-w-[320px]">
                 <!-- Purple Star Overlapping Sign -->
-                <div class="absolute -top-5 -right-5 w-11 h-11 bg-[#cbaacb] border-[4px] border-[#3f2a24] rotate-[18deg] flex items-center justify-center shadow-sm" style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);"></div>
+                <div class="absolute -top-4 -right-4 sm:-top-5 sm:-right-5 w-9 h-9 sm:w-11 sm:h-11 bg-[#cbaacb] border-[3px] sm:border-[4px] border-[#3f2a24] rotate-[18deg] flex items-center justify-center shadow-sm" style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);"></div>
                 
-                <h1 class="text-[46px] font-black text-[#ff6b8b] tracking-wider leading-none relative drop-shadow-sm">
-                    RIZZ<span class="text-2xl absolute top-0 -right-6 text-[#ff6b8b]">♥</span>
+                <h1 class="text-[34px] sm:text-[46px] font-black text-[#ff6b8b] tracking-wider leading-none relative drop-shadow-sm mt-1 sm:mt-0">
+                    RIZZ<span class="text-xl sm:text-2xl absolute top-0 -right-5 sm:-right-6 text-[#ff6b8b]">♥</span>
                 </h1>
-                <h2 class="text-[32px] font-black text-[#3f2a24] leading-none mt-1">MACHINE</h2>
+                <h2 class="text-[24px] sm:text-[32px] font-black text-[#3f2a24] leading-none mt-1">MACHINE</h2>
                 
-                <!-- Subtitle Note Below Sign -->
-                <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-[#ffeebf] border-[4px] border-[#3f2a24] px-5 py-1.5 shadow-[3px_3px_0px_#3f2a24] rotate-[-2deg] whitespace-nowrap">
-                    <div class="absolute top-0 left-2 w-6 h-4 washi-pink rotate-[-12deg] -translate-y-2"></div>
-                    <div class="absolute top-0 right-2 w-6 h-4 washi-pink rotate-[16deg] -translate-y-2"></div>
-                    <span class="font-handwriting text-[20px] font-bold text-[#3f2a24]">bad pickup lines. <span class="text-[#ff6b8b]">good vibes.</span></span>
+                <!-- Subtitle Note Below Sign (Now Responsive!) -->
+                <div class="absolute -bottom-5 sm:-bottom-6 left-1/2 -translate-x-1/2 bg-[#ffeebf] border-[3px] sm:border-[4px] border-[#3f2a24] px-4 sm:px-5 py-1 sm:py-1.5 shadow-[2px_2px_0px_#3f2a24] sm:shadow-[3px_3px_0px_#3f2a24] rotate-[-2deg] w-[105%] sm:w-auto text-center leading-tight">
+                    <div class="absolute top-0 left-2 w-5 sm:w-6 h-3 sm:h-4 washi-pink rotate-[-12deg] -translate-y-1.5 sm:-translate-y-2"></div>
+                    <div class="absolute top-0 right-2 w-5 sm:w-6 h-3 sm:h-4 washi-pink rotate-[16deg] -translate-y-1.5 sm:-translate-y-2"></div>
+                    <span class="font-handwriting text-[16px] sm:text-[20px] font-bold text-[#3f2a24]">bad pickup lines. <span class="text-[#ff6b8b]">good vibes.</span></span>
                 </div>
             </div>
 
             <!-- MASCOT SCREEN -->
             <!-- Warm Cream Screen -->
-            <div class="mt-16 bg-[#fffcf2] border-[6px] border-[#3f2a24] rounded-[2rem] p-5 relative overflow-hidden screen-inner flex flex-col items-center justify-center h-48">
+            <div class="mt-14 sm:mt-16 bg-[#fffcf2] border-[5px] sm:border-[6px] border-[#3f2a24] rounded-[1.5rem] sm:rounded-[2rem] p-4 sm:p-5 relative overflow-hidden screen-inner flex flex-col items-center justify-center h-40 sm:h-48">
                 <!-- Cute Face -->
-                <div id="mascot-face" class="flex items-center justify-center gap-5 transition-transform duration-300">
+                <div id="mascot-face" class="flex items-center justify-center gap-4 sm:gap-5 transition-transform duration-300">
                     <!-- Eye 1 -->
-                    <div class="w-10 h-14 bg-[#3f2a24] rounded-full flex justify-end p-2">
-                        <div class="w-3.5 h-5 bg-white rounded-full"></div>
+                    <div class="w-8 h-12 sm:w-10 sm:h-14 bg-[#3f2a24] rounded-full flex justify-end p-1.5 sm:p-2">
+                        <div class="w-2.5 h-4 sm:w-3.5 sm:h-5 bg-white rounded-full"></div>
                     </div>
                     <!-- Mouth & Blushes -->
-                    <div class="flex flex-col items-center gap-1 mt-5">
-                        <div class="w-7 h-7 border-b-[5px] border-r-[5px] border-[#3f2a24] rotate-45 rounded-sm"></div>
-                        <div class="flex gap-16 -mt-8">
-                            <div class="w-10 h-4 bg-[#ffc4d0] rounded-full opacity-90 rotate-[-12deg]"></div>
-                            <div class="w-10 h-4 bg-[#ffc4d0] rounded-full opacity-90 rotate-[12deg]"></div>
+                    <div class="flex flex-col items-center gap-1 mt-4 sm:mt-5">
+                        <div class="w-6 h-6 sm:w-7 sm:h-7 border-b-[4px] sm:border-b-[5px] border-r-[4px] sm:border-r-[5px] border-[#3f2a24] rotate-45 rounded-sm"></div>
+                        <div class="flex gap-12 sm:gap-16 -mt-6 sm:-mt-8">
+                            <div class="w-8 h-3 sm:w-10 sm:h-4 bg-[#ffc4d0] rounded-full opacity-90 rotate-[-12deg]"></div>
+                            <div class="w-8 h-3 sm:w-10 sm:h-4 bg-[#ffc4d0] rounded-full opacity-90 rotate-[12deg]"></div>
                         </div>
                     </div>
                     <!-- Eye 2 (Wink) -->
-                    <div class="w-12 h-3 bg-[#3f2a24] rounded-full rotate-[15deg]"></div>
+                    <div class="w-10 h-2.5 sm:w-12 sm:h-3 bg-[#3f2a24] rounded-full rotate-[15deg]"></div>
                 </div>
-                <div id="status-text" class="absolute bottom-3 font-handwriting text-[22px] text-[#3f2a24] font-bold opacity-0 transition-opacity"></div>
+                <div id="status-text" class="absolute bottom-2 sm:bottom-3 font-handwriting text-[18px] sm:text-[22px] text-[#3f2a24] font-bold opacity-0 transition-opacity"></div>
             </div>
 
             <!-- MIDDLE CONTROLS -->
-            <div class="flex items-center justify-between px-1 gap-2 mt-1">
+            <div class="flex items-center justify-between px-1 gap-1 sm:gap-2">
                 
                 <!-- Left: Indicator Lights -->
-                <div class="flex flex-col gap-3.5">
-                    <div class="flex items-center gap-2">
-                        <div id="light-chaos" class="w-5 h-5 bg-[#ff8c42] border-[3px] border-[#3f2a24] rounded-full shadow-[inset_0px_2px_4px_rgba(0,0,0,0.3)] opacity-30"></div>
-                        <span class="text-[10px] font-black tracking-widest text-[#3f2a24]">CHAOS</span>
+                <div class="flex flex-col gap-2.5 sm:gap-3.5">
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <div id="light-chaos" class="w-4 h-4 sm:w-5 sm:h-5 bg-[#ff8c42] border-[2px] sm:border-[3px] border-[#3f2a24] rounded-full shadow-[inset_0px_2px_4px_rgba(0,0,0,0.3)] opacity-30"></div>
+                        <span class="text-[8px] sm:text-[10px] font-black tracking-widest text-[#3f2a24]">CHAOS</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <div id="light-spicy" class="w-5 h-5 bg-[#fdfd96] border-[3px] border-[#3f2a24] rounded-full shadow-[inset_0px_2px_4px_rgba(0,0,0,0.3)] opacity-30"></div>
-                        <span class="text-[10px] font-black tracking-widest text-[#3f2a24]">SPICY</span>
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <div id="light-spicy" class="w-4 h-4 sm:w-5 sm:h-5 bg-[#fdfd96] border-[2px] sm:border-[3px] border-[#3f2a24] rounded-full shadow-[inset_0px_2px_4px_rgba(0,0,0,0.3)] opacity-30"></div>
+                        <span class="text-[8px] sm:text-[10px] font-black tracking-widest text-[#3f2a24]">SPICY</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <div id="light-wholesome" class="w-5 h-5 bg-[#8be8b0] border-[3px] border-[#3f2a24] rounded-full shadow-[inset_0px_2px_4px_rgba(0,0,0,0.3)] opacity-100"></div>
-                        <span class="text-[10px] font-black tracking-widest text-[#3f2a24]">WHOLESOME</span>
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <div id="light-wholesome" class="w-4 h-4 sm:w-5 sm:h-5 bg-[#8be8b0] border-[2px] sm:border-[3px] border-[#3f2a24] rounded-full shadow-[inset_0px_2px_4px_rgba(0,0,0,0.3)] opacity-100"></div>
+                        <span class="text-[8px] sm:text-[10px] font-black tracking-widest text-[#3f2a24]">WHOLESOME</span>
                     </div>
                 </div>
 
-                <!-- Center: Giant Button (Vibrant Pink) -->
-                <button id="generate-btn" onclick="dispenseRizz()" class="btn-giant w-[136px] h-[136px] rounded-full bg-[#ff748c] border-[6px] border-[#3f2a24] flex flex-col items-center justify-center flex-shrink-0 z-10 relative">
-                    <div class="absolute inset-0 rounded-full border-[3px] border-white/40 pointer-events-none"></div>
-                    <span class="font-black text-[#3f2a24] text-[20px] leading-tight mt-1 drop-shadow-sm">GENERATE<br>RIZZ</span>
-                    <span class="text-sm mt-1 text-[#3f2a24]">♡</span>
+                <!-- Center: Giant Button (Responsive Scaling) -->
+                <button id="generate-btn" onclick="dispenseRizz()" class="btn-giant w-[105px] h-[105px] sm:w-[136px] sm:h-[136px] rounded-full bg-[#ff748c] border-[5px] sm:border-[6px] border-[#3f2a24] flex flex-col items-center justify-center flex-shrink-0 z-10 relative">
+                    <div class="absolute inset-0 rounded-full border-[2px] sm:border-[3px] border-white/40 pointer-events-none"></div>
+                    <span class="font-black text-[#3f2a24] text-[15px] sm:text-[20px] leading-tight mt-1 drop-shadow-sm text-center">GENERATE<br>RIZZ</span>
+                    <span class="text-xs sm:text-sm mt-0.5 sm:mt-1 text-[#3f2a24]">♡</span>
                 </button>
 
-                <!-- Right: Chaos Dial (Lilac Purple) -->
-                <div class="flex flex-col items-center cursor-pointer pt-2" onclick="toggleDial()">
-                    <span class="text-[10px] font-black tracking-widest mb-1 text-[#3f2a24]">CHAOS LEVEL</span>
+                <!-- Right: Chaos Dial -->
+                <div class="flex flex-col items-center cursor-pointer pt-1 sm:pt-2" onclick="toggleDial()">
+                    <span class="text-[8px] sm:text-[10px] font-black tracking-widest mb-1 text-[#3f2a24]">CHAOS LEVEL</span>
                     
                     <!-- Dial UI -->
-                    <div class="relative w-20 h-14 flex justify-center items-end pb-3">
+                    <div class="relative w-16 h-12 sm:w-20 sm:h-14 flex justify-center items-end pb-2 sm:pb-3">
                         <svg class="absolute top-0 w-full h-full" viewBox="0 0 100 50">
                             <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#3f2a24" stroke-width="4" stroke-dasharray="4 12"/>
                         </svg>
                         
-                        <div id="chaos-knob" class="dial-knob w-10 h-10 bg-[#cbaacb] border-[4px] border-[#3f2a24] rounded-full shadow-sm relative z-10 rotate-[-45deg]">
-                            <div class="absolute top-1 left-1/2 -translate-x-1/2 w-2 h-3.5 bg-[#3f2a24] rounded-full"></div>
+                        <div id="chaos-knob" class="dial-knob w-8 h-8 sm:w-10 sm:h-10 bg-[#cbaacb] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-full shadow-sm relative z-10 rotate-[-45deg]">
+                            <div class="absolute top-1 left-1/2 -translate-x-1/2 w-1.5 h-2.5 sm:w-2 sm:h-3.5 bg-[#3f2a24] rounded-full"></div>
                         </div>
 
-                        <span class="absolute bottom-0 -left-2 text-[10px] font-black text-[#3f2a24]">LOW<br>🙂</span>
-                        <span class="absolute bottom-0 -right-4 text-[10px] font-black text-[#e05252]">MAX<br>😈</span>
+                        <span class="absolute bottom-0 -left-1 sm:-left-2 text-[8px] sm:text-[10px] font-black text-[#3f2a24]">LOW<br>🙂</span>
+                        <span class="absolute bottom-0 -right-2 sm:-right-4 text-[8px] sm:text-[10px] font-black text-[#e05252]">MAX<br>😈</span>
                     </div>
                 </div>
             </div>
 
-            <!-- CATEGORY GRID (V1.3.1 Backend - 9 Categories) -->
+            <!-- CATEGORY GRID -->
             <!-- Warm faded background for grid container -->
-            <div class="relative border-[5px] border-[#3f2a24] rounded-2xl p-4 bg-[#ffc4d0]/60 mt-4 shadow-inner">
-                <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#fffcf2] border-[4px] border-[#3f2a24] px-4 py-0.5 rounded-md text-[11px] font-black tracking-widest shadow-[3px_3px_0px_#3f2a24]">
+            <div class="relative border-[4px] sm:border-[5px] border-[#3f2a24] rounded-xl sm:rounded-2xl p-3 sm:p-4 bg-[#ffc4d0]/60 mt-3 sm:mt-4 shadow-inner">
+                <div class="absolute -top-3.5 sm:-top-4 left-1/2 -translate-x-1/2 bg-[#fffcf2] border-[3px] sm:border-[4px] border-[#3f2a24] px-3 sm:px-4 py-0.5 rounded-md text-[9px] sm:text-[11px] font-black tracking-widest shadow-[2px_2px_0px_#3f2a24] sm:shadow-[3px_3px_0px_#3f2a24] whitespace-nowrap">
                     CHOOSE YOUR VIBE
                 </div>
                 
-                <div class="grid grid-cols-3 gap-2.5 mt-3">
+                <div class="grid grid-cols-3 gap-2 sm:gap-2.5 mt-2 sm:mt-3">
                     <!-- Row 1 -->
-                    <button onclick="selectCat('college', this)" class="grid-btn bg-[#ffdac1] border-[4px] border-[#3f2a24] rounded-[14px] py-2 px-1 flex flex-col items-center justify-center gap-1">
-                        <span class="text-[22px] leading-none">🎓</span><span class="text-[9px] font-black tracking-wider text-[#3f2a24]">COLLEGE</span>
+                    <button onclick="selectCat('college', this)" class="grid-btn bg-[#ffdac1] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-[10px] sm:rounded-[14px] py-1.5 sm:py-2 px-1 flex flex-col items-center justify-center gap-1">
+                        <span class="text-[18px] sm:text-[22px] leading-none">🎓</span><span class="text-[8px] sm:text-[9px] font-black tracking-wider text-[#3f2a24]">COLLEGE</span>
                     </button>
-                    <button onclick="selectCat('anime', this)" class="grid-btn bg-[#cbaacb] border-[4px] border-[#3f2a24] rounded-[14px] py-2 px-1 flex flex-col items-center justify-center gap-1">
-                        <span class="text-[22px] leading-none">🌸</span><span class="text-[9px] font-black tracking-wider text-[#3f2a24]">ANIME</span>
+                    <button onclick="selectCat('anime', this)" class="grid-btn bg-[#cbaacb] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-[10px] sm:rounded-[14px] py-1.5 sm:py-2 px-1 flex flex-col items-center justify-center gap-1">
+                        <span class="text-[18px] sm:text-[22px] leading-none">🌸</span><span class="text-[8px] sm:text-[9px] font-black tracking-wider text-[#3f2a24]">ANIME</span>
                     </button>
-                    <button onclick="selectCat('gaming', this)" class="grid-btn bg-[#b2e2f2] border-[4px] border-[#3f2a24] rounded-[14px] py-2 px-1 flex flex-col items-center justify-center gap-1">
-                        <span class="text-[22px] leading-none">🎮</span><span class="text-[9px] font-black tracking-wider text-[#3f2a24]">GAMING</span>
+                    <button onclick="selectCat('gaming', this)" class="grid-btn bg-[#b2e2f2] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-[10px] sm:rounded-[14px] py-1.5 sm:py-2 px-1 flex flex-col items-center justify-center gap-1">
+                        <span class="text-[18px] sm:text-[22px] leading-none">🎮</span><span class="text-[8px] sm:text-[9px] font-black tracking-wider text-[#3f2a24]">GAMING</span>
                     </button>
                     <!-- Row 2 -->
-                    <button onclick="selectCat('ai', this)" class="grid-btn bg-[#fdfd96] border-[4px] border-[#3f2a24] rounded-[14px] py-2 px-1 flex flex-col items-center justify-center gap-1">
-                        <span class="text-[22px] leading-none">🤖</span><span class="text-[9px] font-black tracking-wider text-[#3f2a24]">AI NERD</span>
+                    <button onclick="selectCat('ai', this)" class="grid-btn bg-[#fdfd96] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-[10px] sm:rounded-[14px] py-1.5 sm:py-2 px-1 flex flex-col items-center justify-center gap-1">
+                        <span class="text-[18px] sm:text-[22px] leading-none">🤖</span><span class="text-[8px] sm:text-[9px] font-black tracking-wider text-[#3f2a24]">AI NERD</span>
                     </button>
-                    <button onclick="selectCat('chaos', this)" class="grid-btn bg-[#e5bcfc] border-[4px] border-[#3f2a24] rounded-[14px] py-2 px-1 flex flex-col items-center justify-center gap-1">
-                        <span class="text-[22px] leading-none">💀</span><span class="text-[9px] font-black tracking-wider text-[#3f2a24]">CHAOS</span>
+                    <button onclick="selectCat('chaos', this)" class="grid-btn bg-[#e5bcfc] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-[10px] sm:rounded-[14px] py-1.5 sm:py-2 px-1 flex flex-col items-center justify-center gap-1">
+                        <span class="text-[18px] sm:text-[22px] leading-none">💀</span><span class="text-[8px] sm:text-[9px] font-black tracking-wider text-[#3f2a24]">CHAOS</span>
                     </button>
-                    <button onclick="selectCat('coding', this)" class="grid-btn bg-[#ffb7b2] border-[4px] border-[#3f2a24] rounded-[14px] py-2 px-1 flex flex-col items-center justify-center gap-1">
-                        <span class="text-[22px] leading-none">💻</span><span class="text-[9px] font-black tracking-wider text-[#3f2a24]">CODING</span>
+                    <button onclick="selectCat('coding', this)" class="grid-btn bg-[#ffb7b2] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-[10px] sm:rounded-[14px] py-1.5 sm:py-2 px-1 flex flex-col items-center justify-center gap-1">
+                        <span class="text-[18px] sm:text-[22px] leading-none">💻</span><span class="text-[8px] sm:text-[9px] font-black tracking-wider text-[#3f2a24]">CODING</span>
                     </button>
                     <!-- Row 3 -->
-                    <button onclick="selectCat('romantic', this)" class="grid-btn bg-[#ff9fb3] border-[4px] border-[#3f2a24] rounded-[14px] py-2 px-1 flex flex-col items-center justify-center gap-1">
-                        <span class="text-[22px] leading-none">❤️</span><span class="text-[9px] font-black tracking-wider text-[#3f2a24]">ROMANTIC</span>
+                    <button onclick="selectCat('romantic', this)" class="grid-btn bg-[#ff9fb3] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-[10px] sm:rounded-[14px] py-1.5 sm:py-2 px-1 flex flex-col items-center justify-center gap-1">
+                        <span class="text-[18px] sm:text-[22px] leading-none">❤️</span><span class="text-[8px] sm:text-[9px] font-black tracking-wider text-[#3f2a24]">ROMANTIC</span>
                     </button>
-                    <button onclick="selectCat('funny', this)" class="grid-btn bg-[#e2f0cb] border-[4px] border-[#3f2a24] rounded-[14px] py-2 px-1 flex flex-col items-center justify-center gap-1">
-                        <span class="text-[22px] leading-none">😂</span><span class="text-[9px] font-black tracking-wider text-[#3f2a24]">FUNNY</span>
+                    <button onclick="selectCat('funny', this)" class="grid-btn bg-[#e2f0cb] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-[10px] sm:rounded-[14px] py-1.5 sm:py-2 px-1 flex flex-col items-center justify-center gap-1">
+                        <span class="text-[18px] sm:text-[22px] leading-none">😂</span><span class="text-[8px] sm:text-[9px] font-black tracking-wider text-[#3f2a24]">FUNNY</span>
                     </button>
-                    <button onclick="selectCat('surprise', this)" class="grid-btn selected bg-[#fffcf2] border-[4px] border-[#3f2a24] rounded-[14px] py-2 px-1 flex flex-col items-center justify-center gap-1 brightness-95 translate-y-[5px] shadow-none">
-                        <span class="text-[22px] leading-none">🎲</span><span class="text-[9px] font-black tracking-wider text-[#3f2a24]">SURPRISE</span>
+                    <button onclick="selectCat('surprise', this)" class="grid-btn selected bg-[#fffcf2] border-[3px] sm:border-[4px] border-[#3f2a24] rounded-[10px] sm:rounded-[14px] py-1.5 sm:py-2 px-1 flex flex-col items-center justify-center gap-1 brightness-95 translate-y-[4px] shadow-none">
+                        <span class="text-[18px] sm:text-[22px] leading-none">🎲</span><span class="text-[8px] sm:text-[9px] font-black tracking-wider text-[#3f2a24]">SURPRISE</span>
                     </button>
                 </div>
             </div>
 
             <!-- TICKET DISPENSER SLOT -->
-            <div class="mt-5 flex flex-col items-center relative">
-                <!-- Dark ink slot -->
-                <div class="w-64 h-7 bg-[#3f2a24] rounded-md border-b-[3px] border-[#ffc4d0] shadow-[inset_0_4px_10px_rgba(0,0,0,0.6)] relative z-20"></div>
+            <div class="mt-4 sm:mt-5 flex flex-col items-center relative">
+                <!-- Dark ink slot (Responsive width) -->
+                <div class="w-56 sm:w-64 h-6 sm:h-7 bg-[#3f2a24] rounded-md border-b-[3px] border-[#ffc4d0] shadow-[inset_0_4px_10px_rgba(0,0,0,0.6)] relative z-20"></div>
                 
-                <div id="ticket-slot" class="w-full flex justify-center -mt-5 min-h-[20px] overflow-visible relative z-10">
+                <div id="ticket-slot" class="w-full flex justify-center -mt-4 sm:-mt-5 min-h-[20px] overflow-visible relative z-10">
                     <!-- Generated Ticket goes here -->
                 </div>
             </div>
@@ -302,7 +302,7 @@
         </div> <!-- END OF VENDING MACHINE -->
 
         <!-- BEAUTIFUL MOON FOOTER -->
-        <div class="mt-16 mb-6 px-4 text-center font-handwriting text-[24px] text-[#3f2a24] opacity-80 z-20 relative tracking-wide max-w-lg">
+        <div class="mt-12 sm:mt-16 mb-6 px-4 text-center font-handwriting text-[24px] text-[#3f2a24] opacity-80 z-20 relative tracking-wide max-w-lg">
              🌕
         </div>
 
@@ -325,9 +325,9 @@
         function selectCat(cat, btn) {
             currentCategory = cat;
             document.querySelectorAll('.grid-btn').forEach(b => {
-                b.classList.remove('selected', 'brightness-95', 'translate-y-[5px]', 'shadow-none');
+                b.classList.remove('selected', 'brightness-95', 'translate-y-[4px]', 'shadow-none');
             });
-            btn.classList.add('selected', 'brightness-95', 'translate-y-[5px]', 'shadow-none');
+            btn.classList.add('selected', 'brightness-95', 'translate-y-[4px]', 'shadow-none');
         }
 
         function toggleDial() {
@@ -393,23 +393,23 @@
             const sColor = rarityColors[data.rarity] || rarityColors['Common'];
 
             ticketSlot.innerHTML = `
-                <div class="printing-animation receipt-tear-bottom w-64 bg-[#fffcf2] border-x-[4px] border-[#3f2a24] p-5 font-ticket text-[#3f2a24] shadow-2xl relative pt-6">
+                <div class="printing-animation receipt-tear-bottom w-56 sm:w-64 bg-[#fffcf2] border-x-[3px] sm:border-x-[4px] border-[#3f2a24] p-4 sm:p-5 font-ticket text-[#3f2a24] shadow-2xl relative pt-6 sm:pt-6">
                     
-                    <div class="text-center border-b-[2px] border-dashed border-[#bfaaa0] pb-2 mb-4">
-                        <div class="text-sm tracking-widest font-bold">♥ RIZZ MACHINE ♥</div>
-                        <div class="text-[11px] font-bold mt-1 uppercase text-[#8b7e74]">${data.category} ${data.emoji}</div>
+                    <div class="text-center border-b-[2px] border-dashed border-[#bfaaa0] pb-2 mb-3 sm:mb-4">
+                        <div class="text-xs sm:text-sm tracking-widest font-bold">♥ RIZZ MACHINE ♥</div>
+                        <div class="text-[10px] sm:text-[11px] font-bold mt-1 uppercase text-[#8b7e74]">${data.category} ${data.emoji}</div>
                     </div>
 
-                    <div class="my-5 text-center font-bold text-[14px] leading-relaxed">
+                    <div class="my-4 sm:my-5 text-center font-bold text-[13px] sm:text-[14px] leading-relaxed">
                         ${data.line}
                     </div>
 
-                    <div class="absolute bottom-16 right-3 border-[3px] font-black text-sm px-2.5 py-0.5 rounded stamp-animate bg-white" style="border-color: ${sColor}; color: ${sColor}; transform: rotate(-12deg);">
+                    <div class="absolute bottom-14 sm:bottom-16 right-2 sm:right-3 border-[2px] sm:border-[3px] font-black text-xs sm:text-sm px-2 py-0.5 rounded stamp-animate bg-white" style="border-color: ${sColor}; color: ${sColor}; transform: rotate(-12deg);">
                         ${data.rarity}
                     </div>
 
-                    <div class="mt-8 pt-4 border-t-[2px] border-[#e8ded6] flex justify-center">
-                        <div class="w-48 h-8 bg-[repeating-linear-gradient(90deg,#3f2a24,#3f2a24_3px,transparent_3px,transparent_6px,#3f2a24_6px,#3f2a24_7px,transparent_7px,transparent_9px)] opacity-90"></div>
+                    <div class="mt-6 sm:mt-8 pt-3 sm:pt-4 border-t-[2px] border-[#e8ded6] flex justify-center">
+                        <div class="w-40 sm:w-48 h-6 sm:h-8 bg-[repeating-linear-gradient(90deg,#3f2a24,#3f2a24_2px,transparent_2px,transparent_5px,#3f2a24_5px,#3f2a24_6px,transparent_6px,transparent_8px)] sm:bg-[repeating-linear-gradient(90deg,#3f2a24,#3f2a24_3px,transparent_3px,transparent_6px,#3f2a24_6px,#3f2a24_7px,transparent_7px,transparent_9px)] opacity-90"></div>
                     </div>
                 </div>
             `;
