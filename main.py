@@ -1,5 +1,5 @@
 """
-Rizz Machine 🎰 
+Rizz Machine 🎰 - 
 """
 
 import os
@@ -12,15 +12,13 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from openai import AsyncOpenAI
 
-from fastapi.staticfiles import StaticFiles
-
 # ---------------------------------------------------------------------------
-# Configuration & Gemini Setup
+# Configuration & OpenAI Setup
 # ---------------------------------------------------------------------------
 
 MODEL = "gpt-4o-mini"
 MOCK_MODE = False # Toggle this to False only when your API quota resets
-PROMPT_VERSION = "v1.3.1-openai"
+PROMPT_VERSION = "v1.4"
 
 api_key = os.environ.get("OPENAI_API_KEY", "dummy_key_for_ui_testing")
 
@@ -29,6 +27,7 @@ client = AsyncOpenAI(
     api_key=api_key,
     base_url="https://aicredits.in/v1"
 )
+
 # ---------------------------------------------------------------------------
 # SMART CATEGORY SYSTEM 🧠
 # ---------------------------------------------------------------------------
@@ -141,20 +140,6 @@ CATEGORIES = {
 
 VALID_RIZZ = ["cute", "flirty", "smooth", "bold", "delusional"]
 
-COMEDY_STYLES = [
-    "absurd", "dry humour", "satire", "gen-z humour", "wordplay",
-    "unexpected twist", "self-roast", "cringe on purpose", "corporate email"
-]
-
-OUTPUT_STYLES = [
-    "late-night text", 
-    "conversation opener", 
-    "voice note transcript", 
-    "reply to their story", 
-    "accidental confession", 
-    "playful dare"
-]
-
 RARITIES = {
     "Common": 55,
     "Rare": 25,
@@ -164,32 +149,40 @@ RARITIES = {
 }
 
 THE_YEARNING_ENGINE = """
-You are not a generator. You are crafting ammunition. 
-Your success is measured by one thing: Would someone copy this exact message to send to their crush?
+You are crafting ammunition. Your success is measured by one thing: Would someone copy this exact message to send to their crush?
 
-TARGET REACTION:
-The person reading the message should laugh and blush simultaneously. 
-The ideal real-world response is: "shut up 😭", "that's actually so smooth", or an involuntary smile.
+VOICE:
+Write like the effortlessly funny person everyone secretly has a crush on.
+You're playful. You're observant. You're confident.
+You flirt because it's fun, not because you're trying to impress.
+You never explain your jokes. You never sound like a motivational quote. You never sound like an AI assistant.
 
-THE 50/50 RULE (STRICT):
-Your output must be 50% genuinely funny + 50% unmistakably flirty.
-- If it is only funny, you failed (that is just a joke).
-- If it is only romantic, you failed (that is too cheesy).
-- Hide the effort, NOT the attraction. Admitting interest confidently is highly attractive.
+CONVERSATION FIRST:
+Never write a line that feels complete by itself.
+Write something that naturally invites a reply.
+The best message is one that starts a conversation, not one that ends with a punchline.
 
-WHAT GOOD FLIRTING FEELS LIKE:
-- Flirting is not complimenting. Flirting is making someone feel chosen.
-- Assume chemistry already exists. Assume they are already smiling; your job is to make the smile wider.
-- Create irresistible conversational tension. 
-- Romance is allowed. Corniness is strictly banned. 
-- Never apologize for flirting. Never be needy.
+BAD VS GOOD EXAMPLES (LEARN FROM CONTRAST):
+Bad: You're beautiful.
+Bad: Can I have your number?
+Bad: Are you Wi-Fi?
+Good: You seem like the type of person who'd make me forget what point I was trying to make.
+Good: I'm starting to think talking to you is becoming a scheduling problem.
+Good: You keep replying just fast enough for me to embarrass myself again.
 
-THE GROUP CHAT TEST (Run this silently before outputting):
-If this message was dropped in a group chat, would the reaction be: "bro who wrote this, send me that"? 
-If the reaction is just "lol" or "aww", REWRITE IT.
+THE 50/50 RULE:
+Your output must be 50% genuinely funny + 50% unmistakably flirty. 
+Neither should work without the other.
 
-Output EXACTLY ONE message. Do not use quotes. Do not explain. Make it stealable.
+STRICT RULES:
+- Don't stop at the first obvious idea. Keep rewriting internally until the message feels surprising, natural, and worth stealing.
+- Every word must earn its place. If a word doesn't increase the flirt, the laugh, or the rhythm, delete it.
+- Surprise the reader. The ending should never be the most predictable continuation.
+- The ultimate benchmark: Does this sound like something a real person would actually send to someone they're flirting with? If not, rewrite it.
+
+Output EXACTLY ONE winning message. Do not explain your choice. Do not use quotes.
 """
+
 # ---------------------------------------------------------------------------
 # Procedural Prompt Engine
 # ---------------------------------------------------------------------------
@@ -211,20 +204,18 @@ def build_prompt(category: str, chaos: int, rizz_level: str) -> tuple[str, str, 
 
     # 3. Select Variables
     primary_topic = random.choice(cat_data["topics"])
-    comedy = random.choice(COMEDY_STYLES)
-    output = random.choice(OUTPUT_STYLES)
     
     # 4. Map Chaos Int to String
+    # 4. Map Chaos Int to String (Injecting the SPICE)
     if chaos < 20:
-        chaos_str = "Normal, coherent."
-    elif chaos < 40:
-        chaos_str = "Slightly weird, offbeat."
-    elif chaos < 70:
-        chaos_str = "Chaotic, unexpected directions."
+        chaos_str = "Smooth, grounded, and safe. Zero risk."
+    elif chaos < 50:
+        chaos_str = "Playful and bold. Slightly risky teasing."
+    elif chaos < 80:
+        chaos_str = "Spicy and dangerously confident. Extremely high conversational tension."
     else:
-        chaos_str = "Absolute brainrot. Feral internet energy."
+        chaos_str = "Absolute chaos. Spicy, feral, unhinged confidence. Say something that would make them drop their phone."
 
-    # 5. Handle Crossovers (Epic+)
     # 5. Handle Crossovers (Epic+)
     topic_string = f"Topic: {primary_topic}"
     if rolled_rarity in ["Epic", "Legendary", "Mythic"]:
@@ -235,7 +226,7 @@ def build_prompt(category: str, chaos: int, rizz_level: str) -> tuple[str, str, 
 
     # 6. Construct Final Prompt
     prompt = f"""
-Generate ONE message. Do NOT think of it as a pickup line. Think of it as irresistible conversational tension.
+Generate ONE winning message. Think of it as irresistible conversational tension.
 
 Category Vibe: {cat_data['name']}
 Category Instructions: {cat_data['instructions']}
@@ -243,28 +234,26 @@ Category Instructions: {cat_data['instructions']}
 {topic_string}
 
 Tone Level: {rizz_level}
-Comedy Style: {comedy}
 Chaos Level: {chaos_str} (Score: {chaos}/100)
-Contextual Format: {output}
 
 CHEMISTRY METER (Internal Check):
 - Flirt Score: 5/10 minimum
 - Funny Score: 5/10 minimum
-If either score is lower than 5, rewrite the message before outputting.
+If either score is lower than 5, discard the draft.
 
 Rules:
-- Make the reader grin, hide their face for a second, and immediately want to reply.
+- The reader should instinctively know how to reply. The message should create chemistry, not just admiration.
 - Keep it short, punchy, and under 25 words.
 - Let the text carry the weight.
 """
     return prompt, rolled_rarity, actual_category
+
 # ---------------------------------------------------------------------------
 # FastAPI Application
 # ---------------------------------------------------------------------------
 
 app = FastAPI()
-# This tells FastAPI: "When someone asks for /static/..., look inside the 'static' folder on the hard drive"
-app.mount("/static", StaticFiles(directory="static"), name="static")
+
 class GenerateResponse(BaseModel):
     id: str
     line: str
@@ -331,4 +320,5 @@ async def generate(
         version=PROMPT_VERSION
     )
 
+# Mount the static directory to serve the frontend
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
