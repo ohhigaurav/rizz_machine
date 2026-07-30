@@ -383,8 +383,8 @@
                     chaosInt = 60; // Triggers the "Spicy" backend tier
                     tone = 'bold';
                 } else if (chaosState === 2) {
-                    chaosInt = 100; // Triggers the "Feral" backend tier
-                    tone = 'unhinged';
+                 chaosInt = 100;
+                 tone = 'delusional'; 
                 }
                 
                 const response = await fetch(`/generate?category=${currentCategory}&chaos=${chaosInt}&rizz=${tone}`);

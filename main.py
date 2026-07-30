@@ -19,7 +19,7 @@ from openai import AsyncOpenAI
 
 MODEL = "gpt-4o-mini"
 MOCK_MODE = False # Toggle this to False only when your API quota resets
-PROMPT_VERSION = "v3.0"
+PROMPT_VERSION = "v3.3"
 CANDIDATES_PER_REQUEST = 5 # generate N candidates, then let the model pick the winner
 
 api_key = os.environ.get("OPENAI_API_KEY", "dummy_key_for_ui_testing")
@@ -47,7 +47,14 @@ CATEGORIES = {
             "Sending a reel and hoping they get the hint",
             "Borrowing a hoodie and never returning it",
             "Accidentally making eye contact twice",
-            "Staying on the call after saying 'bye'"
+            "Staying on the call after saying 'bye'",
+            "Falling asleep mid voice call",
+            "Remembering a tiny detail they mentioned once",
+            "Walking slower so the conversation lasts longer",
+            "Saving their message instead of replying right away",
+            "Noticing they started using your favorite emoji",
+            "Getting nervous re-reading a text before sending it",
+            "Finding an old photo of them and smiling at it"
         ]
     },
     "funny": {
@@ -59,7 +66,14 @@ CATEGORIES = {
             "Creating fake scenarios",
             "Overcommitting to a bit",
             "Weaponizing confidence",
-            "Accidentally oversharing"
+            "Accidentally oversharing",
+            "Losing an argument you started as a joke",
+            "Explaining a meme they didn't ask about",
+            "Doing a bad impression of them",
+            "Correcting their grammar out of spite",
+            "Roasting their music taste",
+            "Turning a simple question into a whole TED talk",
+            "Pretending to be offended for the bit"
         ]
     },
     "chaos": {
@@ -73,7 +87,13 @@ CATEGORIES = {
             "Pretending something tiny is life-changing",
             "Dramatic overreactions",
             "Treating a fast reply like a marriage proposal",
-            "Filing an emotional lawsuit over nothing"
+            "Filing an emotional lawsuit over nothing",
+            "Announcing a breakup that never happened",
+            "Threatening to move cities over one unanswered text",
+            "Writing a eulogy for your own dignity",
+            "Starting a petition against their existence",
+            "Blaming them for a bad exam grade",
+            "Declaring a national emergency over their Wi-Fi silence"
         ]
     },
     "gaming": {
@@ -86,7 +106,13 @@ CATEGORIES = {
             "Waiting in queue",
             "Throwing ranked games",
             "Arguing over loot",
-            "Staying up until 4 AM for 'one more game'"
+            "Staying up until 4 AM for 'one more game'",
+            "Getting teamkilled and forgiving them anyway",
+            "Losing because you were busy watching them play",
+            "Splitting the last potion",
+            "Naming the lobby after an inside joke",
+            "Rage quitting and coming right back",
+            "Sending a friend request after one good match"
         ]
     },
     "ai": {
@@ -98,7 +124,14 @@ CATEGORIES = {
             "Overfitting a model at 3 AM",
             "Algorithms recommending the right person",
             "Screen time increasing",
-            "Testing against massive datasets"
+            "Testing against massive datasets",
+            "A neural net converging faster than your patience",
+            "Debugging a crush like a stack trace",
+            "Getting flagged as an outlier and being okay with it",
+            "A recommendation engine that only suggests them",
+            "Running out of GPU memory thinking about them",
+            "Training data that's 90% just their texts",
+            "A model that keeps hallucinating their name"
         ]
     },
     "anime": {
@@ -111,7 +144,13 @@ CATEGORIES = {
             "Explaining your villain origin story to them",
             "The classic 'enemies to lovers' tension",
             "Realizing you're in a filler episode together",
-            "Monologuing instead of just saying hi"
+            "Monologuing instead of just saying hi",
+            "A slow-motion hallway walk that never actually happened",
+            "Powering up before sending one text",
+            "Getting betrayed by your own confidence arc",
+            "A rival showing up at the worst possible time",
+            "Confessing feelings during an unrelated plot twist",
+            "Losing your composure over one plot-relevant wink"
         ]
     },
     "coding": {
@@ -124,7 +163,13 @@ CATEGORIES = {
             "Writing raw Assembly maths",
             "Rubber duck debugging",
             "Shipping features broken",
-            "A segmentation fault in the brain"
+            "A segmentation fault in the brain",
+            "A merge conflict that's really about something else",
+            "A stack overflow that isn't about code anymore",
+            "Committing at 3 AM with a message you'll regret",
+            "Force-pushing over your own dignity",
+            "An infinite loop of overthinking one text",
+            "A null pointer where your chill used to be"
         ]
     },
     "college": {
@@ -137,7 +182,13 @@ CATEGORIES = {
             "Pretending to study for finals",
             "Surviving a tier-10 engineering college together",
             "Documenting a tech blog",
-            "Walking back to the hostel"
+            "Walking back to the hostel",
+            "Sharing notes as an excuse to talk",
+            "Skipping a lecture to avoid embarrassing yourself",
+            "Running into them during a fire drill",
+            "A group project that's really just an excuse",
+            "Getting caught staring during a boring seminar",
+            "Splitting an auto fare home"
         ]
     }
 }
@@ -161,32 +212,33 @@ RARITIES = {
 
 THE_YEARNING_ENGINE = """
 You are the friend with unreal rizz — the one who says something so unhinged and cheesy
-it should not work, and it works anyway. You're funny first, flirty always, a little
-feral about it. This generates rizz lines for 19-24 year olds. Every output should land
-as a laugh and a blush at the exact same moment, not one before the other.
+it should not work, and it works anyway, delivered with the confidence of someone who
+knows they're a catch and isn't hiding it. You're funny first, flirty always, a little
+feral about it, and never short on attitude. This generates rizz lines for 19-24 year
+olds. Every output should land as a laugh and a blush at the exact same moment.
 
 HALL OF FAME — this IS the voice. Read these until the tone is automatic. Never output
 these verbatim, never reuse their exact structure, write something new that could sit
 in this same list without looking out of place:
 not to be dramatic but if you dont text me back im joining a boy band out of spite
 ---
-you looked at me and my brain just buffered like bad wifi fr
+not me being nice to you, dont get used to it
 ---
 im convinced youre doing witchcraft because i cannot stop thinking about you
 ---
-not gonna lie you make me wanna delete every dating app and just simp for you exclusively
+the audacity of you being this attractive without my permission
 ---
 youre mid at texting back but somehow still top tier at ruining my whole concentration
 ---
-i was having a completely normal day until you smiled and now im useless
+make it make sense why im still replying to you
 ---
-youre lucky youre cute because youre also kind of a menace and i still like it
+i give attention like its expensive and youre somehow still getting it for free
 ---
-pretty sure my heart skipped like three reps just watching you walk by
+i was busy being unbothered until you showed up, rude of you honestly
 ---
-not me planning our whole future off one "hey" text, we move fast here
+not gonna lie you make me wanna delete every dating app and just simp for you exclusively
 ---
-youre so annoyingly perfect its honestly rude at this point
+dont flatter yourself. okay maybe a little. dont let it go to your head
 ---
 be so fr with me did you practice that smile or is it just unfair by default
 ---
@@ -201,6 +253,15 @@ it's completely normal. The energy is "I have no chill and I'm not sorry about i
 "let me carefully compliment you." The crush has to be the whole point — if the line
 still works as a joke with them removed, it's not flirty enough. The bar: would this
 get sent in a group chat, not written to impress one.
+
+SASSY & BITCHY:
+Attitude on top of the chaos. You're not chasing, you're graciously allowing this to
+happen — talk like being into them is a slight inconvenience you've decided to permit.
+Feigned reluctance is the flirt: "i wasnt even gonna reply but here we are" hits harder
+than genuine enthusiasm ever could. Comebacks should snap, not ramble — dry, a little
+catty, delivered like you already won whatever argument you're not having. You're the
+prize and you know it; they're lucky, and you're only pretending to be annoyed about it.
+Mock-superiority, eye-roll energy, "and?" as a full sentence — that's the register.
 
 VARY THE SHAPE:
 Don't default to "[small moment], and now I'm [exaggerated reaction]" every time — that
@@ -217,9 +278,9 @@ and avoiding them is one of the fastest ways to stop sounding machine-written. I
 reads like it was proofread, it's wrong. Under 25 words. Let the text carry the weight.
 
 THE ONE RULE THAT DOESN'T BEND:
-Bold, unhinged, and thirsty is the job — push all of that as far as it goes. Cruel,
-humiliating, or anything that reads as ignoring a "no" is not edgy, it's just mean, and
-it stops being funny the second it lands that way. That's the only ceiling here.
+Bold, unhinged, thirsty, and sassy is the job — push all of that as far as it goes.
+Cruel, humiliating, or anything that reads as ignoring a "no" is not sass, it's just
+mean, and it stops being funny the second it lands that way. That's the only ceiling.
 
 Output EXACTLY ONE winning message. No explanation. No quotes.
 """
@@ -240,6 +301,9 @@ Judge on:
 - Is it bold and committed, or does it play it safe? Between two funny options, the
   one that's more unhinged, more thirsty, more willing to roast them wins — a polite
   or hedged version of the same joke should lose to the version with more nerve.
+- Does it have snap and attitude — sassy, a little superior, mock-annoyed to be into
+  them — or does it read as earnest and sweet? Between equally funny options, the one
+  with more attitude wins.
 - Is the flirt inseparable from the joke (remove the crush and does it still stand)?
 - Does it look typed on a phone (lowercase, loose punctuation, no em dash) or does it
   look edited/proofread? Penalize the edited-looking one even if the wording is funnier.
@@ -251,47 +315,50 @@ Reply with ONLY the number of the winner. Nothing else — no explanation, no pu
 # Procedural Prompt Engine
 # ---------------------------------------------------------------------------
 
-def build_prompt(category: str, chaos: int, rizz_level: str) -> tuple[str, str, str]:
-    """Builds the prompt and returns the chosen category key and rarity key."""
-
-    # 1. Resolve Surprise / Fallback
+def resolve_category_and_rarity(category: str) -> tuple[str, str]:
+    """Resolves the surprise/fallback category and rolls rarity. Stays fixed
+    for the whole request since both are echoed back in the response."""
     actual_category = category
     if actual_category not in CATEGORIES:
         actual_category = random.choice(list(CATEGORIES.keys()))
 
-    cat_data = CATEGORIES[actual_category]
-
-    # 2. Roll Rarity
     rarity_keys = list(RARITIES.keys())
     rarity_weights = list(RARITIES.values())
     rolled_rarity = random.choices(rarity_keys, weights=rarity_weights, k=1)[0]
+    return actual_category, rolled_rarity
 
-    # 3. Select Variables
-    primary_topic = random.choice(cat_data["topics"])
-
-    # 4. Map Chaos Int to a real progression, not just "more random"
+def _chaos_str(chaos: int) -> str:
+    """Maps chaos int to a real progression, not just 'more random'."""
     if chaos < 20:
-        chaos_str = (
+        return (
             "Cheesy and direct, zero hedging — still unmistakably flirty and a little "
             "extra, just lower stakes than the higher tiers."
         )
     elif chaos < 50:
-        chaos_str = (
+        return (
             "Unhinged-lite. Roast them while flirting, commit hard to one ridiculous "
             "claim, say the thirsty thing outright instead of dancing around it."
         )
     elif chaos < 80:
-        chaos_str = (
+        return (
             "Fully unhinged. Feral confidence, borderline-concerning claims delivered "
             "completely straight-faced, escalate a tiny moment into a whole bit."
         )
     else:
-        chaos_str = (
+        return (
             "Maximum chaos. Zero chill, full commitment to the most absurd premise "
             "available, the kind of line that gets a '💀' before it gets a reply."
         )
 
-    # 5. Handle Crossovers (Epic+)
+def build_prompt_variant(actual_category: str, rolled_rarity: str, chaos: int, rizz_level: str) -> str:
+    """Builds ONE prompt with its OWN randomly rolled topic. Called once per
+    candidate (not once per request) so N parallel generations explore N
+    different scenarios instead of N phrasings of the same one."""
+    cat_data = CATEGORIES[actual_category]
+    primary_topic = random.choice(cat_data["topics"])
+    chaos_str = _chaos_str(chaos)
+
+    # Handle Crossovers (Epic+) — rolled fresh per candidate too
     topic_string = f"Topic: {primary_topic}"
     if rolled_rarity in ["Epic", "Legendary", "Mythic"]:
         other_categories = [k for k in CATEGORIES.keys() if k != actual_category]
@@ -299,8 +366,7 @@ def build_prompt(category: str, chaos: int, rizz_level: str) -> tuple[str, str, 
         secondary_topic = random.choice(CATEGORIES[crossover_cat]["topics"])
         topic_string = f"Mashup Topics: Combine [{primary_topic}] AND [{secondary_topic}] naturally."
 
-    # 6. Construct Final Prompt
-    prompt = f"""
+    return f"""
 Generate ONE unhinged, cheesy, blush-and-laugh line. Imagine your most feral friend
 typed it in 15 seconds flat, no overthinking, no editing pass.
 
@@ -315,7 +381,6 @@ Chaos Level: {chaos_str} (Score: {chaos}/100)
 If it reads as safe, polite, or careful — it's wrong, go weirder and bolder.
 Under 25 words.
 """
-    return prompt, rolled_rarity, actual_category
 
 # ---------------------------------------------------------------------------
 # Generation pipeline: fan out N candidates, then ask the model to pick the
@@ -341,10 +406,13 @@ async def generate_one(prompt: str) -> str | None:
     except Exception:
         return None
 
-async def generate_candidates(prompt: str, n: int = CANDIDATES_PER_REQUEST) -> list[str]:
-    """Runs N generations concurrently. Plain asyncio.gather instead of the
-    `n=` param, since not every OpenAI-compatible proxy honors it."""
-    results = await asyncio.gather(*[generate_one(prompt) for _ in range(n)])
+async def generate_candidates(actual_category: str, rolled_rarity: str, chaos: int, rizz_level: str, n: int = CANDIDATES_PER_REQUEST) -> list[str]:
+    """Runs N generations concurrently, each with its OWN randomly rolled topic
+    (see build_prompt_variant) so the candidates are genuinely different scenarios,
+    not just different phrasings of one. Plain asyncio.gather instead of the `n=`
+    param, since not every OpenAI-compatible proxy honors it."""
+    prompts = [build_prompt_variant(actual_category, rolled_rarity, chaos, rizz_level) for _ in range(n)]
+    results = await asyncio.gather(*[generate_one(p) for p in prompts])
     return [r for r in results if r]
 
 def _normalize_for_dedup(text: str) -> str:
@@ -427,7 +495,7 @@ async def generate(
     if rizz not in VALID_RIZZ:
         rizz = "flirty"
 
-    prompt, rarity_key, actual_category = build_prompt(category, chaos, rizz)
+    actual_category, rarity_key = resolve_category_and_rarity(category)
     cat_data = CATEGORIES[actual_category]
     gen_id = uuid.uuid4().hex[:8]
 
@@ -442,8 +510,9 @@ async def generate(
         line_text = random.choice(mock_lines)
     else:
         try:
-            # PIPELINE: fan out N candidates, drop near-duplicate ideas, let the model pick the winner
-            candidates = await generate_candidates(prompt)
+            # PIPELINE: fan out N candidates (each with its own topic roll),
+            # drop near-duplicate ideas, let the model pick the winner
+            candidates = await generate_candidates(actual_category, rarity_key, chaos, rizz)
             if not candidates:
                 raise ValueError("no candidates generated")
             candidates = dedupe_candidates(candidates)
